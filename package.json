@@ -1,0 +1,22 @@
+{
+  "name": "blazetwit",
+  "version": "1.0.0",
+  "description": "",
+  "bin": {
+    "blaze": "./bin/blaze.js"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rahulvish1364/BlazeTwit.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rahulvish1364/BlazeTwit/issues"
+  },
+  "homepage": "https://github.com/rahulvish1364/BlazeTwit#readme"
+}
