@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha"
+    "test": "nyc mocha --recursive"
   },
   "repository": {
     "type": "git",
@@ -20,10 +20,12 @@
   },
   "homepage": "https://github.com/rahulvish1364/BlazeTwit#readme",
   "devDependencies": {
-    "eslint-config-google": "^0.14.0"
+    "eslint-config-google": "^0.14.0",
+    "nyc": "^15.0.1"
   },
   "dependencies": {
     "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "commander": "^5.1.0",
     "configstore": "^5.0.1",
     "inquirer": "^7.1.0",

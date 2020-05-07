@@ -20,5 +20,5 @@ const pkg = require('../package.json');
 
 program
     .version(pkg.version)
-    .command('configure', 'configure Twiitter related credentials')
+    .command('configure', 'configure Twitter related credentials')
     .parse(process.argv)
