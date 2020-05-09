@@ -18,7 +18,7 @@ const configure = {
                 validate: util.notEmpty
             }
         ])
-      await creds.storeKeyAndSecret(answer.key, answer.secret)  
+      await creds.storeKeyAndSecret('apiKey', answer.key, answer.secret)  
      }
 }
 
