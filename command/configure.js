@@ -22,7 +22,7 @@ const configure = {
                 validate: util.notEmpty
             }
         ])
-      await creds.storeKeyAndSecret('apiKey', answer.key, answer.secret)  
+      await creds.storeKeyAndSecret('consumer', answer.key, answer.secret)  
      },
      async account(name){
         let creds = new CredentialManager(name)

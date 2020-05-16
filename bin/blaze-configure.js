@@ -12,7 +12,12 @@ program
         await configure.consumer(pkg.name)
     })
  
-
+program
+    .command('account')
+    .description('Authorize access to a twitter account')
+    .action(async ()=>{
+        await configure.account(pkg.name)
+    })
 program
     .parse(process.argv)
      
