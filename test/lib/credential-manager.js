@@ -1,12 +1,9 @@
-    const chai = require('chai');
-    const expect = chai.expect
-    const sinon = require('sinon');
-    const inquirer = require('inquirer');
-    const CredentialManager = require('../../lib/credential-manager');
-    const keytar = require('keytar');
-    const chaiAsPromised = require('chai-as-promised')
-    const fs = require('fs')
-    const path = require('path')
+const chai = require('chai');
+const expect = chai.expect
+const CredentialManager = require('../../lib/credential-manager');
+const chaiAsPromised = require('chai-as-promised')
+const fs = require('fs-extra')
+const path = require('path')
 chai.use(chaiAsPromised)
 
 describe('a credential manager', () => {
@@ -21,11 +18,24 @@ describe('a credential manager', () => {
         expect(key).to.equal('foo');
         expect(secret).to.equals('bar')
     });
-    it('should reject when no crednetials are found', async () => {
+    it('should reject when no keys are found', async () => {
         await creds.clearKeyAndSecret('apiKey')
-        expect(creds.getKeyAndSecret('apiKey')).to.be.rejected
+        expect(creds.getKeyAndSecret('apiKey')).to.be.rejectedWith('Missing comsumer key')
     });
-    after((done) => {
-        fs.unlink(path.join(process.env.HOME, '.config', 'configstore', 'blaze-test.json'), done)
+    it('should reject when no secret  is found ',async () => {
+        creds.conf.set('key.consumer', 'foo')
+        await expect(creds.getKeyAndSecret('consumer')).to.be.rejectedWith('Missing consumer key')
+        creds.conf.delete('key.consumer')
+    });
+    it('should remove all credentials ', async () => {
+        await creds.storeKeyAndSecret('consumer', 'one', 'two')
+        await creds.storeKeyAndSecret('acount', 'three', 'four')
+        await creds.clearAll()
+        expect(creds.getKeyAndSecret('consumer')).to.be.rejectedWith()
+        expect(creds.getKeyAndSecret('account')).to.be.rejectedWith()
+    });
+    after(async () => {
+        await creds.clearAll()
+        await fs.unlink(path.join(process.env.HOME, '.config', 'configstore', 'blaze-test.json'))
     });
 })
