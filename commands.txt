@@ -1,0 +1,5 @@
+1 blaze confgure consumer 
+Add the api key and secret securely
+
+2. blaze configure account 
+Helps the user to add the account to the CLI securly

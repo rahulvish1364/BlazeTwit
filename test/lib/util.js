@@ -1,5 +1,6 @@
 const chai = require('chai');
 const expect = chai.expect
+const sinon = require('sinon')
 const util = require('../../lib/util')
 
 describe('the util module', () => {
@@ -10,6 +11,22 @@ describe('the util module', () => {
         });
         it('should return an error when given an empty string', () => {
             expect(util.notEmpty('')).to.equal('This value is required');
+        });
+    });
+
+    context('the handleError function', () => {
+        it('should set exit code to 1', () => {
+            sinon.stub(console, 'error')
+            util.handleError('foo')
+            expect(process.exitCode).to.equal(1)
+            console.error.restore()
+        });
+        it('should print a console.error message', () => {
+            sinon.stub(console, 'error')
+            util.handleError('bar')
+            expect(console.error.calledWith('bar'))
+            console.error.restore()
+
         });
     });
 })
